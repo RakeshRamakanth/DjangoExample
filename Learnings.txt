@@ -1,0 +1,49 @@
+Create a model and table
+
+(env) C:\Localdata\Learning\Django Project\mysite>python manage.py makemigrations books
+Migrations for 'books':
+  books\migrations\0001_initial.py
+    - Create model Books
+
+(env) C:\Localdata\Learning\Django Project\mysite>python manage.py sqlmigrate books 0001
+BEGIN;
+--
+-- Create model Books
+--
+CREATE TABLE "books_books" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "author" varchar(100)
+NOT NULL, "price" varchar(100) NOT NULL, "type" varchar(100) NOT NULL);
+COMMIT;
+
+(env) C:\Localdata\Learning\Django Project\mysite>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books, contenttypes, sessions
+Running migrations:
+  Applying books.0001_initial... OK
+
+(env) C:\Localdata\Learning\Django Project\mysite>python manage.py shell
+Python 3.8.3 (tags/v3.8.3:6f8c832, May 13 2020, 22:20:19) [MSC v.1925 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books.models import Books
+>>> Books.objects.all()
+<QuerySet []>
+>>> a = Books()
+>>> a.name = "Life Book"
+>>> a.author = "ABCD"
+>>> a.price = "100"
+>>> a.type = "Science"
+>>> Books.objects.all()
+<QuerySet []>
+>>> a.save()
+>>> Books.objects.all()
+<QuerySet [<Books: Books object (1)>]>
+>>> b = Books()
+>>> b.name = "Success"
+>>> b.author = "XYZ"
+>>> a.price = "200"
+>>> b.type = "Fictions"
+>>> b.save()
+>>> Books.objects.all()
+
+To Run the server
+(env) C:\Localdata\Learning\Django Project\mysite>python manage.py runserver
